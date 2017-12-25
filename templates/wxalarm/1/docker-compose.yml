@@ -1,0 +1,17 @@
+version: '2'
+services:
+  wxalarm:
+    image: jevic/wxalarm:latest
+    ports:
+    - ${http_port}:51001
+    environment:
+      SECRET: $SECRET
+      CORPID: $CORPID
+      AGENTID: $AGENTID
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  {{- if ne .Values.HOST_LABEL "" }}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+  {{- end }}

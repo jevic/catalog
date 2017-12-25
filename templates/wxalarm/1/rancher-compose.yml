@@ -1,0 +1,37 @@
+.catalog:
+  name: "wxalarm"
+  version: '1.0'
+  description: "企业微信号报警接口应用"
+  uuid: wxalarm-1
+  questions:
+    - variable: http_port
+      description: "外部可访问端口"
+      label: "Alarm Http Port"
+      required: true
+      default: "51001"
+      type: "int"
+    - variable: CORPID
+      description: '企业号 corpid'
+      label: 'CORPID'
+      required: true
+      default: ""
+      type: string
+    - variable: SECRET
+      description: 'APP 应用secret'
+      label: 'SECRET'
+      required: true
+      default: ""
+      type: string
+    - variable: AGENTID
+      description: 'APP 应用 agent_id'
+      label: 'AGENTID'
+      required: true
+      default: ""
+      type: int
+    - variable: HOST_LABEL
+      label: "选择指定主机标签运行实例"
+      description: |
+        Example: 'web=true'
+      required: false
+      default: ""
+      type: "string"

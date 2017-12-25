@@ -1,0 +1,8 @@
+name: wxalarm
+description: |
+    DT 基于企业微信号API接口 二次封装的报警接口调用应用
+    - 请求示例: http://127.0.0.1:51001/send_message?content=message
+version: '1'
+category: OPS
+maintainer: jieyang <admin@jevic.cn>
+projectURL: https://github.com/jevic/wxalarm/
