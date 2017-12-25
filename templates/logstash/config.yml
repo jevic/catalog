@@ -1,0 +1,7 @@
+name: Logstash
+description: |
+    Logstash 2.3.4 基于官网镜像增加了IPIP ip过滤以及其他相关插件
+version: '1'
+category: ELK
+maintainer: jieyang <admin@jevic.cn>
+projectURL: https://github.com/jevic/logstash/

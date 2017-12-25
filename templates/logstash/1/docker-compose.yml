@@ -1,0 +1,21 @@
+version: '2'
+volumes:
+  ${VOLUMES}:
+    external: true
+    driver: rancher-nfs
+services:
+  logstash:
+    image: jevic/logstash:2.3.4
+    stdin_open: true
+    volumes:
+    - ${VOLUMES}:/opt/logstash/etc
+    tty: true
+    command:
+    - -f
+    - /opt/logstash/etc/${CONFIG}
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+  {{- if ne .Values.HOST_LABEL "" }}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+  {{- end }}

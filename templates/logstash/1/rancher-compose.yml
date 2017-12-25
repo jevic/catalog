@@ -1,0 +1,26 @@
+.catalog:
+  name: "logstash"
+  version: '1.0'
+  description: "Logstash 2.3.4"
+  uuid: logstash-1
+  questions:
+    - variable: VOLUMES
+      description: |
+        Example: 'logstash/nginx'
+      label: "NFS 挂载卷目录"
+      required: true
+      default: ""
+      type: "string"
+    - variable: CONFIG 
+      description: '配置文件'
+      label: 'Config'
+      required: true
+      default: "logstash.conf"
+      type: string
+    - variable: HOST_LABEL
+      label: "选择指定主机标签运行实例"
+      description: |
+        Example: 'logstash=true'
+      required: false
+      default: ""
+      type: "string"
