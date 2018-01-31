@@ -1,0 +1,58 @@
+version: '2'
+.catalog:
+  name: "log5min-spark"
+  version: '1.0'
+  description: "spark-5min-logs"
+  maintainer: "jieyang <admin@jevic.cn>"
+  uuid: log5min-1
+  questions:
+    - variable: SPARK_MASTER
+      label: 'spark-master'
+      description: '指定worker所要连接的master 主机名'
+      required: true
+      type: "string"
+    - variable: WORKERS
+      label: 'worker scale'
+      description: '默认master节点也会启用worker'
+      required: true
+      default: 1
+      type: "int"
+    - variable: MASTER_IP
+      label: 'master ip'
+      description: "设置运行任务脚本中的master ip 填写wan地址"
+      required: true
+      type: "string"
+    - variable: MASTER_HOST
+      label: 'master hostname'
+      description: "设置运行任务脚本中的master host主机名"
+      required: true
+      type: "string"
+    - variable: HDFS_PATH
+      label: 'hdfs 日志存放目录'
+      description: "设置运行任务脚本日志存储在HDFS中的目录"
+      required: false
+      default: ""
+      type: "string"
+    - variable: HOST_LABEL_WORKER
+      label: "指定worker 主机标签"
+      description: "Example: spark-worker=5min"
+      required: false
+      default: ""
+      type: "string"
+    - variable: HOST_LABEL_MASTER
+      label: "指定master 主机标签"
+      description: "Example: spark-master=5min"
+      required: false
+      default: ""
+      type: "string"
+
+services:
+  woker:
+    scale: ${WORKERS}
+    start_on_create: true
+  jobs:
+    scale: 1
+    start_on_create: true
+  master:
+    scale: 1
+    start_on_create: true

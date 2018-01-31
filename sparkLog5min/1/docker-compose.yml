@@ -1,0 +1,42 @@
+version: '2'
+services:
+  woker:
+    image: jevic/spark-2.0.2:worker
+    environment:
+      SPARK_MASTER: ${SPARK_MASTER}
+    stdin_open: true
+    network_mode: host
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  {{- if ne .Values.HOST_LABEL_WORKER "" }}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_WORKER}
+  {{- end }}
+  jobs:
+    image: jevic/jobs-5min-logs:2.11
+    environment:
+      MASTER_IP: ${MASTER_IP}
+      MASTER_HOST: ${MASTER_HOST}
+      HDFS_PATH: ${HDFS_PATH}
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /opt/jobs
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+  master:
+    image: jevic/spark-2.0.2:master
+    stdin_open: true
+    network_mode: host
+    tty: true
+    volumes_from:
+    - jobs
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: jobs
+  {{- if ne .Values.HOST_LABEL_MASTER "" }}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL_MASTER}
+  {{- end }}
+

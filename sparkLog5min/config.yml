@@ -1,0 +1,7 @@
+name: log5min-spark
+description: |
+    五分钟日志合成 spark计算任务
+version: '1'
+category: spark
+maintainer: jieyang <admin@jevic.cn>
+projectURL: https://github.com/jevic/bigdata
